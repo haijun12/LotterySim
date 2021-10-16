@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Sim</title>
+    <style type="text/css">
+        head {font-size: 40pt;}
+        body {font-size: 30pt;}
+        img {
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1> Lottery Simulator!</h1>
+    <img src="https://i.ytimg.com/vi/gqhKxbmcmDE/maxresdefault.jpg" align="right">
+    <script language = "javascript">
+        // Creates an array of numbers between 0-48
+        document.write("Random Pick: ")
+        var lotteryNumbers = new Array;
+        // Sets first element to a random number
+        lotteryNumbers[0] = Math.round((Math.random()* 48));
+        document.write(lotteryNumbers[0] + " ");
+        var size = 1;
+        // For loop to get the other 4 numbers
+        for (var i = 1; i < 5; i++)
+        {
+            lotteryNumbers[i] = Math.round((Math.random()* 48));
+            // Prevents the repetition of the same number
+            for (var j = 0; j < size; j++)
+            {
+                while (lotteryNumbers[i] == lotteryNumbers[j])
+                {
+                    lotteryNumbers[i] = Math.round((Math.random()* 48));
+                }
+            }
+            document.write(lotteryNumbers[i] + " ");
+            size++;
+        }
+        lotteryNumbers.sort();
+        // Adds lucky number to back
+        lotteryNumbers[5] = Math.round((Math.random() * 18));
+        // Displays sorted numbers
+        document.write("Lucky Number: " + lotteryNumbers[5] + "<br \>")
+        document.write("Pick sorted: ");
+        for (var i = 0; i < 5; i++)
+        {
+            document.write(lotteryNumbers[i] + " ");
+        }
+        document.write("Lucky Number: " + lotteryNumbers[5] + "<br \>")
+        // This program assumes that the winning lottery numbers are between 0-48
+        var winningNumbers = new Array(6);
+        var string =  prompt("Enter first 5 winning lottery numbers : ");
+        // Splits the string by space
+        winningNumbers = string.split(' ');
+        // Sorts array
+        winningNumbers.sort();
+        // This program assumes that the lucky ball number is between 0-18
+        winningNumbers[5] = prompt("Enter the lucky ball number: ");
+        // Variable for if the lucky ball was matched
+        matchingLucky = Boolean(lotteryNumbers[5] == winningNumbers[5]);
+        document.write("Winning Numbers Sorted: ");
+        // Create a variable to keep track of matched
+        var match = 0;
+        for (var i = 0; i < 5; i++)
+        {
+            document.write(winningNumbers[i] + " ");
+            for (var j = 0; j < 5; j++)
+            {
+                // Compares both arrays
+                if (lotteryNumbers[j] == winningNumbers[i])
+                {
+                    match++;
+                }
+            }
+        }
+        document.write("Lucky number: " + winningNumbers[5] + "<br \>");
+        // Written statements
+        document.write("You matched " + match + " winning lottery number(s)! <br \>");
+        document.write(matchingLucky? "You did match the lucky ball! <br\> " : "You didn't match the lucky ball. <br \> Good luck next time! <br \>");
+        // Payouts based on matched and lucky ball number
+        if (matchingLucky && match == 5)
+            document.write("Your payout is $7,000 a WEEK for LIFE <br \>");
+        else if (match == 5)
+            document.write("Your payout is $25,000 a YEAR FOR LIFE <br \>");
+        else if (matchingLucky && match == 4)
+            document.write("Your payout is $5,000 <br \>");
+        else if (match == 4)
+            document.write("Your payout is $200 <br \>");
+        else if (matchingLucky && match == 3)
+            document.write("Your payout is $150 <br \>");
+        else if (match == 3)
+            document.write("Your payout is $20 <br \>");
+        else if (matchingLucky && match == 2)
+            document.write("Your payout is $25 <br \>");
+        else if (match == 2)
+            document.write("Your payout is $3 <br \>");
+        else if (matchingLucky && match == 1)
+            document.write("Your payout is $6 <br \>");
+        else if (matchingLucky)
+            document.write("Your payout is $4 <br \>");
+    </script>
+</body>
+</html>
